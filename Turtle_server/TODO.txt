@@ -1,0 +1,4 @@
+TODO in order:
+
+--Set up data tranfer
+--Set up color renders for all blocks
