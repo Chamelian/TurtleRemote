@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Turtle Control Panel</title>
@@ -7,8 +8,8 @@
   <body>
     <!-- Voxel rendering -->
     <script type="module">
-      import RAWheading from 'http://localhost:8100/heading.json' assert {type:'json'}
-      import RAWcoords from 'http://localhost:8080/coords.json' assert {type:'json'}
+      var RAWheading = await fetch("./json/heading.json").then((response) => {return response.text()})
+      var RAWcoords = await fetch("./json/coords.json").then((response) => {return response.text()})
       import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js"
       import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
 
@@ -87,8 +88,8 @@
       function updater() {
         var InitialCoords = eval(JSON.stringify(RAWcoords))
         setInterval(function () {
-          fetch('http://localhost:8080/coords.json').then(function (response) {
-            return response.json()
+          fetch('./json/coords.json').then(function (response) {
+            return response.text()
           }).then(function (data) {
             if (data != InitialCoords) {
               scene.remove.apply(scene, scene.children)
@@ -111,8 +112,8 @@
           }).catch(function (error) {
             console.log(error)
           })
-          fetch('http://localhost:8100/heading.json').then(function (response) {
-            return response.json()
+          fetch('./json/heading.json').then(function (response) {
+            return response.text()
           }).then(function (data) {
             if (data != heading) {
               scene.remove(scene.getObjectByProperty('name', 'ArrowHelper'))
@@ -125,15 +126,15 @@
           }).catch(function (error) {
             console.log(error)
           })
-          fetch('http://localhost:8200/fuelLevel.json').then(function (response) {
-            return response.json()
+          fetch('./json/fuelLevel.json').then(function (response) {
+            return response.text()
           }).then(function (data) {
             fuel_level = data
           }).catch(function (error) {
             console.log(error)
           })
           document.getElementById('coords').innerHTML = turtle_pos + ' ' + heading + ' ' + fuel_level
-        }, .1 * 1000)
+        }, 1 * 1000)
       }
 
       // Cube creation function
