@@ -1,0 +1,2 @@
+- Refactor socket.js
+- Create an interface for instance saving and selection
