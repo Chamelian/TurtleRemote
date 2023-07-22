@@ -125,7 +125,7 @@ function updater() {
     }).catch(function (error) {
       console.log(error)
     })
-    document.getElementById('coords').innerHTML = turtle_pos + ' ' + heading + ' ' + fuel_level
+    document.getElementById('coords').innerHTML = turtle_pos + ' ' + heading.join("") + ' ' + fuel_level
   }, 1 * 1000)
 }
 
